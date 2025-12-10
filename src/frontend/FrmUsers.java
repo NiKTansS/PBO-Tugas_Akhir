@@ -4,7 +4,9 @@
  */
 package frontend;
 import backend.Users;
-import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author NIKY
@@ -19,10 +21,15 @@ public class FrmUsers extends javax.swing.JFrame {
          fillComboBox();   
          loadTable();   
     }
-    
+        private void fillComboBox() {
+        cmbTipeUser.removeAllItems();
+        cmbTipeUser.addItem("Dosen");
+        cmbTipeUser.addItem("Anggota Lab");
+    }
+
     private void loadTable() {
     String[] kolom = {"ID", "Nama", "Kontak", "Tipe User"};
-    DefaultTableModel model = new DefaultTableModel(null, kolom);
+    javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(null, kolom);
 
     for (backend.Users u : backend.Users.getAll()) {
         Object[] data = {
@@ -36,6 +43,14 @@ public class FrmUsers extends javax.swing.JFrame {
 
     jTable1.setModel(model);
 }
+    
+private void clearForm() {
+    txtId.setText("");
+    txtNama.setText("");
+    txtKontak.setText("");
+    cmbTipeUser.setSelectedIndex(0);
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,17 +65,17 @@ public class FrmUsers extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtNama = new javax.swing.JTextField();
+        txtKontak = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        Tipe_User = new javax.swing.JComboBox<>();
+        cmbTipeUser = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -86,24 +101,24 @@ public class FrmUsers extends javax.swing.JFrame {
 
         jLabel3.setText("Nama ");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtNama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtNamaActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtKontak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtKontakActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Kontak");
 
-        Tipe_User.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dosen", "Anggota Lab" }));
-        Tipe_User.addActionListener(new java.awt.event.ActionListener() {
+        cmbTipeUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dosen", "Anggota Lab" }));
+        cmbTipeUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Tipe_UserActionPerformed(evt);
+                cmbTipeUserActionPerformed(evt);
             }
         });
 
@@ -117,6 +132,11 @@ public class FrmUsers extends javax.swing.JFrame {
         });
 
         jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Hapus");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -135,9 +155,9 @@ public class FrmUsers extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Tabel Users");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtIdActionPerformed(evt);
             }
         });
 
@@ -186,9 +206,9 @@ public class FrmUsers extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Tipe_User, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                            .addComponent(txtKontak, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cmbTipeUser, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -206,7 +226,7 @@ public class FrmUsers extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(55, 55, 55))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -222,15 +242,15 @@ public class FrmUsers extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtKontak, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Tipe_User, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTipeUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -243,7 +263,7 @@ public class FrmUsers extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1)
                 .addContainerGap())
@@ -252,21 +272,17 @@ public class FrmUsers extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtNamaActionPerformed
 
-    private void Tipe_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tipe_UserActionPerformed
+    private void cmbTipeUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipeUserActionPerformed
         // TODO add your handling code here:
-        cmbTipeUser.removeAllItems(); 
-        cmbTipeUser.addItem("Dosen");
-        cmbTipeUser.addItem("Anggota Lab");
+    }//GEN-LAST:event_cmbTipeUserActionPerformed
 
-    }//GEN-LAST:event_Tipe_UserActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtKontakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKontakActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtKontakActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -285,7 +301,6 @@ public class FrmUsers extends javax.swing.JFrame {
         loadTable();
         clearForm();
 
-        JOptionPane.showMessageDialog(this, "Data berhasil disimpan!");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -320,8 +335,9 @@ public class FrmUsers extends javax.swing.JFrame {
         cmbTipeUser.setSelectedItem(model.getValueAt(row, 3).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
+        String keyword = txtId.getText();  
         String[] kolom = {"ID", "Nama", "Kontak", "Tipe User"};
            DefaultTableModel model = new DefaultTableModel(null, kolom);
 
@@ -336,7 +352,36 @@ public class FrmUsers extends javax.swing.JFrame {
            }
 
            jTable1.setModel(model);
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtIdActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         int row = jTable1.getSelectedRow();
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Pilih data dulu dari tabel!");
+        return;
+    }
+
+    // Buat object Users
+    Users u = new Users();
+
+    // Ambil ID dari textbox (bukan dari tabel)
+    u.setId_users(Integer.parseInt(txtId.getText()));
+
+    // Set data baru
+    u.setNama(txtNama.getText());
+    u.setKontak(txtKontak.getText());
+    u.setTipe_users(cmbTipeUser.getSelectedItem().toString());
+
+    // Jalankan update (save() otomatis update kalau id sudah ada)
+    u.save();
+
+    // Refresh tabel
+    loadTable();
+    clearForm();
+
+    JOptionPane.showMessageDialog(this, "Data berhasil diupdate!");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,7 +419,7 @@ public class FrmUsers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> Tipe_User;
+    private javax.swing.JComboBox<String> cmbTipeUser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -389,8 +434,8 @@ public class FrmUsers extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtKontak;
+    private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
 }
